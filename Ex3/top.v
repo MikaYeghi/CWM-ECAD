@@ -28,14 +28,13 @@ module counter(
     );
                     
     //Todo: add registers and wires, if needed
-	reg [7:0] counter_out;
-	assign counter_out = counter;
+	// nothing
     //Todo: add user logic
 	always @(posedge clk or posedge rst)
 	begin
 
 	if (rst) // if rst, then set counter to 0
-	counter <= 0;
+	counter_out <= 0;
 
 	else // if not rst
 	begin
@@ -44,9 +43,9 @@ module counter(
 	begin
 
 	if (direction) // if direction is up, then +1
-	counter <= counter + 1;
+	counter_out <= counter_out + 1;
 	else // if direction is down, then -1
-	counter <= counter - 1;
+	counter_out <= counter_out - 1;
 
 	end
 	end
