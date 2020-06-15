@@ -38,13 +38,17 @@ module counter(
 	counter <= 0;
 
 	else // if not rst
+	begin
+
 	if (enable) // if enable, then make changes
-	
+	begin
+
 	if (direction) // if direction is up, then +1
 	counter <= counter + 1;
-
 	else // if direction is down, then -1
 	counter <= counter - 1;
 
+	end
+	end
 	end
 endmodule

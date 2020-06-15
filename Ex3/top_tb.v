@@ -22,7 +22,7 @@ module top_tb(
 	reg rst;
 	reg enable;
 	reg direction;
-	reg [7:0] counter;
+	wire [7:0] counter_out;
 
 	//Todo: Clock generation
 	initial
@@ -31,7 +31,6 @@ module top_tb(
 	       forever
 		begin
 		 #(CLK_PERIOD/2) clk=~clk;
-		$display("Clock value = %d", clk);
 		end
 	     end
 	
@@ -58,11 +57,11 @@ module top_tb(
 //Todo: Finish test, check for success
 	// test for success
 	initial begin
-		#50 
-		if (err==0)
-		  $display("***TEST PASSED! :) ***");
-		$finish;
-	      end
+	#50 
+	if (err==0)
+	  $display("***TEST PASSED! :) ***");
+	$finish;
+	     end
 
 //Todo: Instantiate counter module
 	counter top(
@@ -70,7 +69,7 @@ module top_tb(
 	.rst(rst),
 	.enable(enable),
 	.direction(direction),
-	.counter(counter_out)
+	.counter_out(counter_out)
 );
  
 endmodule 
