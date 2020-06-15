@@ -28,10 +28,7 @@ module logicalunit(
     input [3:0] func,
     output out
     );
-    
-    wire out;
          
-      //Todo: add you logic here
 	assign AB = {a, b};  // concatenate a and b bits
 	assign out = (AB==2'b00) ? func[0]:
 		(AB==2'b01) ? func[1]:
