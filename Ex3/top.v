@@ -24,11 +24,11 @@ module counter(
 	input rst,
 	input enable,
 	input direction,
-	output [7:0] counter_out
+	output reg [7:0] counter_out
     );
                     
     //Todo: add registers and wires, if needed
-	reg [7:0] counter;
+	reg [7:0] counter_out;
 	assign counter_out = counter;
     //Todo: add user logic
 	always @(posedge clk or posedge rst)
