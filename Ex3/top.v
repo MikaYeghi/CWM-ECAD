@@ -16,38 +16,47 @@
 //           counter_out[7:0]
 //////////////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns / 100ps
+`timescale 1ns/100ps
 
-module counter(
-    //Todo: add ports 
-	input clk,
-	input rst,
-	input enable,
-	input direction,
-	output reg [7:0] counter_out
-    );
-                    
-    //Todo: add registers and wires, if needed
-	// nothing
-    //Todo: add user logic
-	always @(posedge clk or posedge rst)
-	begin
+module counter(input rst,
+                     enable,
+                     direction,
+                     clk,
+    output [7:0] counter_out);
+    reg [7:0] counter;
 
-	if (rst) // if rst, then set counter to 0
-	counter_out <= 0;
+// counter code
+    always @(posedge clk or posedge rst)
+        begin
+            if (rst) // if reset = 1
+                begin
+                    counter <= 0; // reset the counter to 0
+                end // end if reset = 1
 
-	else // if not rst
-	begin
+            else // if reset = 0
+                begin
+                    if (enable) // if enable = 1
+                        begin
 
-	if (enable) // if enable, then make changes
-	begin
+                            if (direction) // if direction = 1
+                                begin
+                                    counter <= counter+1; // +1
+                                end // end if direction = 1
+                            else // if direction = 0
+                                begin
+                                    counter <= counter-1; // -1
+                                end // end if direction = 0
 
-	if (direction) // if direction is up, then +1
-	counter_out <= counter_out + 1;
-	else // if direction is down, then -1
-	counter_out <= counter_out - 1;
+                        end // end if enable = 1
+                    else // if enable = 0
+                        begin
+                            counter <= counter; // counter doesn't change
+                        end // end if enable = 0
+                    $display("Counter = %b", counter);
+                end // end if reset = 0
 
-	end
-	end
-	end
+        end // end always
+
+    assign counter_out = counter;
+
 endmodule

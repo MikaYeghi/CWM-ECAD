@@ -8,68 +8,36 @@
 // control signal?). Don't try to test everything at once - validate one part of 
 // the functionality at a time.
 //////////////////////////////////////////////////////////////////////////////////
-`timescale 1ns / 100ps
+`timescale 1ns/100ps
 
-module top_tb(
-    );
-    
-	//Todo: Parameters
-	parameter CLK_PERIOD = 10;
+module top_tb();
+    reg rst, enable, direction, clk;
+    integer i;
+    integer cycles_number = 10;
+    wire [7:0] counter;
 
-	//Todo: Registers and wires
-	reg clk;
-	reg err;
-	reg rst;
-	reg enable;
-	reg direction;
-	wire [7:0] counter_out;
+    counter top(.rst(rst), .enable(enable), .direction(direction), .clk(clk), .counter_out(counter));
 
-	//Todo: Clock generation
-	initial
-	    begin
-	       clk = 1'b0;
-	       forever
-		begin
-		 #(CLK_PERIOD/2) clk=~clk;
-		end
-	     end
-	
-//Todo: User logic
-	initial
-	begin
-	
-	// variables	
-	err = 0; // initially there're no errors
-	direction = 1; // go upwards
-	rst = 1; // initially reset it
-	
-	// start looping
-	forever
-	begin
+    initial
+        begin
+            clk = 0;
+            direction = 1;
+            enable = 1;
 
-	if (rst)
-	rst = 0;
+            for (i = 0; i < cycles_number*2; i = i+1) // give 10 clock cycles
+                begin
+                    #5;
+                    $display("Clock = %b", clk);
+                    clk = ~clk;
+                end
 
-	end
+        end
 
-	end
-    
-//Todo: Finish test, check for success
-	// test for success
-	initial begin
-	#50 
-	if (err==0)
-	  $display("***TEST PASSED! :) ***");
-	$finish;
-	     end
+    initial // resetting
+        begin
+            rst = 1;
+            #2;
+            rst = 0;
+        end
 
-//Todo: Instantiate counter module
-	counter top(
-	.clk(clk),
-	.rst(rst),
-	.enable(enable),
-	.direction(direction),
-	.counter_out(counter_out)
-);
- 
-endmodule 
+endmodule
