@@ -33,7 +33,21 @@ module top_tb();
 	
 	// select control begin
 	if (i == 30)
-	sel <= 0;
+	sel <= 0; // select = 0
+	else
+	begin
+	if (i == 70)
+	button <= 0; // button = 0
+	else
+	begin
+	if (i == 50)
+	begin
+	rst <= 1;
+	#10;
+	rst <= 0;
+	end
+	end
+	end
 	// select control end
 	
 	i = i + 1; // counter increment

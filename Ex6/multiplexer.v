@@ -28,23 +28,23 @@ module mux(
 	output [2:0] out		
     );
 
-	reg [2:0] value_out;
+	//reg [2:0] value_out;
 
-    initial
-    begin
-    $display("Traffic lights are %b, %b, %b", red, amber, green);
-    //#5;
-	if (sel)
-	begin
-	value_out <= dice;
-	end
-	else
-	begin
-	value_out <= {red, amber, green};
-	end
-	//#5;
-    end
+//    initial
+//    begin
+//    //#5;
+//	if (sel)
+//	begin
+//	value_out <= dice;
+//	end
+//	else
+//	begin
+//	value_out <= {red, amber, green};
+//	end
+//	//#5;
+//    end
     
-	assign out = value_out;
+	assign out = (sel == 0) ? dice:
+	   {red, amber, green};
 
 endmodule
