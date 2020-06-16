@@ -32,17 +32,19 @@ module mux(
 
     initial
     begin
-    #5;
+    $display("Traffic lights are %b, %b, %b", red, amber, green);
+    //#5;
 	if (sel)
 	begin
-	value_out = dice;
+	value_out <= dice;
 	end
 	else
 	begin
-	value_out = {red, amber, green};
+	value_out <= {red, amber, green};
 	end
-	#5;
+	//#5;
     end
+    
 	assign out = value_out;
 
 endmodule
