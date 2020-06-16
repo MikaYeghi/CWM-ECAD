@@ -25,7 +25,7 @@ module dice(
 	output [2:0] dice
 );
 	reg [2:0] counter; // counter for the dice
-    reg informed_about_new_value = 0; // 1 if the user has been informed about the new value
+    	reg informed_about_new_value = 0; // 1 if the user has been informed about the new value
 
 	// dice code
 	always @(posedge clk or posedge rst)

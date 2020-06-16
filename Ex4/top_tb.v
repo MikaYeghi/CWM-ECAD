@@ -9,7 +9,6 @@
 
 `timescale 1ns/100ps
 
-
 module top_tb();
 
 	reg rst, clk, button;
