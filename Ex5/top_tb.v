@@ -19,7 +19,7 @@ module top_tb();
 
 	initial
 	begin
-    clk = 0;
+    	clk = 0;
 	forever
 	begin
 	// clock control begin
@@ -27,7 +27,6 @@ module top_tb();
 	clk =~ clk;
 	// clock control end
 	end
-
 	end
 
 endmodule
