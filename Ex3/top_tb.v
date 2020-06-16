@@ -13,7 +13,6 @@
 module top_tb();
     reg rst, enable, direction, clk;
     integer i;
-    integer cycles_number = 10;
     wire [7:0] counter;
 
     counter top(.rst(rst), .enable(enable), .direction(direction), .clk(clk), .counter_out(counter));
@@ -23,12 +22,42 @@ module top_tb();
             clk = 0;
             direction = 1;
             enable = 1;
+	    i = 0;
 
-            for (i = 0; i < cycles_number*2; i = i+1) // give 10 clock cycles
+            forever // cycle forever
                 begin
+		    i = i + 1;
                     #5;
                     $display("Clock = %b", clk);
                     clk = ~clk;
+			// change direction
+		    if (i == 30)
+		    begin
+		    direction <= 0;
+		    end
+
+			// reset
+			if (i == 50)
+			rst <= 1;
+			
+			if (i == 60)
+			begin
+			rst <= 0;
+			direction <= 1;
+			end
+
+			// enable = 0
+			if (i == 90)
+			begin
+			enable <= 0;
+			end
+			
+			if (i == 110)
+			begin
+			enable = 1;
+			direction = 1;
+			end			
+			
                 end
 
         end
@@ -36,7 +65,7 @@ module top_tb();
     initial // resetting
         begin
             rst = 1;
-            #2;
+            #5;
             rst = 0;
         end
 
