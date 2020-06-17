@@ -20,9 +20,9 @@ module top_tb();
 
 	initial
 	begin
-    clk = 0; // clk starts at 0
-    button = 1; // button pressed
-    sel = 1; // initially select = 1
+    	clk = 0; // clk starts at 0
+	button = 1; // button pressed
+	sel = 1; // initially select = 1
 	forever
 	begin
 	
