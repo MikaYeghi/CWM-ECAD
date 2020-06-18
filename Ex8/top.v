@@ -42,6 +42,17 @@ module multiplier_with_axi4(
 	wire s_axi_rvalid;
 
 	// main code
+	assign s_axi_araddr = {26'b0, a, b, 2'b0}; // read address
+	assign s_axi_arvalid = enable; // read address valid
+	assign s_axi_rready = 1; // master ready to accept read data
+	assign s_aclk = clk; // clock
+	assign s_aresetn = rst; // reset
+    assign s_axi_awaddr = 32'b0; // some random address
+    assign s_axi_awvalid = 0; // writing - invalid
+    assign s_axi_wdata = 32'b0; // some random write data
+    assign s_axi_wstrb = 4'b0; // something random again
+    assign s_axi_wvalid = 0; // writing invalid
+    assign s_axi_bready = 0; // master not ready to accept write response
 
 	mybram your_instance_name (
 	  .rsta_busy(rsta_busy),          // output wire rsta_busy
@@ -67,7 +78,10 @@ module multiplier_with_axi4(
 	  .s_axi_rready(s_axi_rready)    // input wire s_axi_rready
 	);
 
-endmodule
+	// s_axi_rdata
+	
+	assign result = s_axi_rdata; 
 
+endmodule
 
 
