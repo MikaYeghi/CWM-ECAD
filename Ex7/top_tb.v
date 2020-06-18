@@ -40,7 +40,7 @@ module top_tb();
 	enable = 1;
 	else
 	begin
-	if (i == 20)
+	if (i == 50)
 	enable = 0;
 	end
 	// enable control end
@@ -50,6 +50,14 @@ module top_tb();
 	begin
 	a <= 3'b111;
 	b <= 3'b111;
+	end
+	else
+	begin
+	if (i == 25)
+	begin
+	a <= 3'b101;
+	b <= 3'b011;
+	end
 	end
 	// a/b control end
 	
