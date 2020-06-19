@@ -33,7 +33,6 @@ set_property PULLUP true 			       [get_ports rst_n]
 #############################################################################################################
 
 create_clock -name clk_p -period 10.0 [get_ports clk_p]
-set_clock_groups -period 10 -name clk  [get_ports clk_p]
 
 
 

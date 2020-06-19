@@ -45,17 +45,18 @@ module top(
 
 //Add logic here
     reg [2:0] led_out;
-    always @(posedge clk or negedge clk)
+    parameter led_freq = 50; // Hz
+    always @(posedge clk)
     begin
+    // always begin
     if (rst_n || button)
     led_out <= 3'b000;
     else
     begin
-    if (clk)
-    led_out <= 3'b111;
-    else
-    led_out <= 3'b000;
-    end 
+    led_out =~ led_out;
+    #(1000000000 / led_freq); // 1e9 ns in 1 s
+    end
+    // always end
     end
     
 	assign led_0 = led_out[0];
