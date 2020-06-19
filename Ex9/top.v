@@ -47,7 +47,7 @@ module top(
     reg [2:0] led_out;
     always @(posedge clk or negedge clk)
     begin
-    if (reset || button)
+    if (rst_n || button)
     led_out <= 3'b000;
     else
     begin

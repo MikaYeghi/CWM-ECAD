@@ -11,23 +11,22 @@
 
 module top_tb();
 
-	reg reset, button;
+	reg rst_n, button;
 	integer i = 0;
 	wire [2:0] led;
 	
 	// connect to top
-	top top(.button(button), .reset(reset), .led(led));
 
 	initial
 	begin
-	reset = 0;
+	rst_n = 0;
 	button = 0;
 
 	forever
 	begin
 	// reset control begin
 	if (i == 5)
-	reset <= 1;
+	rst_n <= 1;
 	// reset control end
 
 	// button control begin
