@@ -46,6 +46,7 @@ module top(
 //Add logic here
     reg [2:0] led_out;
     parameter led_freq = 50; // Hz
+    integer i = 0; // counter
     always @(posedge clk)
     begin
     // always begin
@@ -53,9 +54,10 @@ module top(
     led_out <= 3'b000;
     else
     begin
+    if (i % (1000000000 / led_freq) == 0) // if it's the k*(1s / freq)-th counter
     led_out =~ led_out;
-    #(1000000000 / led_freq); // 1e9 ns in 1 s
     end
+    i = i + 1; // counter increment
     // always end
     end
     
